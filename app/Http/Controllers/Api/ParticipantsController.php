@@ -68,7 +68,11 @@ class ParticipantsController extends Controller
         //
     }
 
+    /*
 
+        detach method detaching all users instead of detaching the only given user
+
+    */
     public function destroy(Request $request,Tournament $tournament,User $user)
     {
         if($tournament->status == 'started')
@@ -78,9 +82,9 @@ class ParticipantsController extends Controller
             ]);
         }
 
-        $tournament = request()->tournament->id;
+        $participant = $request->user()->id;
 
-        $user->tournaments()->detach($tournament);
+        $tournament->participants()->detach($participant);
 
 
         return response()->json([
