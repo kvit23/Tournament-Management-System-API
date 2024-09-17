@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Games;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,6 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Games::class);
             $table->integer('max_participants');
             $table->enum('status', ['upcoming', 'started', 'finished'])->default('upcoming');
             $table->dateTime('start_date');

@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TournamentResource;
+use App\Models\Games;
 use App\Models\Tournament;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class TournamentController extends Controller
 {
@@ -41,10 +43,13 @@ class TournamentController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:225',
             'description' => 'required|string',
+            'games_id' => 'required',
             'max_participants' => 'required|integer',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
         ]);
+
+
 
         $validatedData['user_id'] = $request->user()->id;
 

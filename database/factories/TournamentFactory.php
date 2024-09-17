@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Games;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,6 +21,7 @@ class TournamentFactory extends Factory
         return [
             'name' => fake()->sentence(3),
             'description' => fake()->text,
+            'games_id' => Games::factory(),
             'max_participants' => fake()->numberBetween(80 , 150),
             'user_id' => User::factory()->state(['is_admin' => 1]),
             'winner_id' => User::factory(),

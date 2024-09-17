@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ParticipantsResource;
 use App\Models\Tournament;
 use App\Models\User;
+use App\Notifications\ParticipantJoined;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -55,18 +56,14 @@ class ParticipantsController extends Controller
         $participant = $request->user()->id;
         $tournament->participants()->attach($participant);
 
+        $admin = $request->tournament->User()->id;
+
+        $admin->notify(
+            new ParticipantJoined($tournament)
+        );
+
     }
 
-
-    public function show($participants)
-    {
-
-    }
-
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
     /*
 

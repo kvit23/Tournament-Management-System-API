@@ -15,6 +15,7 @@ class Tournament extends Model
     protected $fillable = [
         'name',
         'description',
+        'games_id',
         'max_participants',
         'status',
         'start_date',
@@ -32,6 +33,12 @@ class Tournament extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function game(): BelongsTo
+    {
+        return $this->belongsTo(Games::class);
+    }
+
 
     public function winner()
     {
